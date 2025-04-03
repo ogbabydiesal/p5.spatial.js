@@ -1,0 +1,28 @@
+{
+  "name": "p5.spatial.js",
+  "version": "1.0.0",
+  "description": "a library for working with spatial and multichannel audio in p5.sound.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ogbabydiesal/p5.spatial.js.git"
+  },
+  "keywords": [
+    "p5.js",
+    "spatial",
+    "audio"
+  ],
+  "author": "Tommy Martinez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ogbabydiesal/p5.spatial.js/issues"
+  },
+  "homepage": "https://github.com/ogbabydiesal/p5.spatial.js#readme",
+  "dependencies": {
+    "rollup": "^4.38.0"
+  }
+}
