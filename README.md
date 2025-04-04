@@ -3,7 +3,7 @@ Have you ever wanted to pan your sounds in ```p5.sound.js``` through a multichan
 
 sp5tial is not meant to replace the ```3DPanner``` object in ```p5.sound.js```, but rather to allow users of ```p5.js``` to create immersive experiences and spatialized sound art using multichannel speaker systems with web-based interfaces and libraries. 
 
-Compose generative experiences with spatial sound sources by creating multiple instances of the ```p5.AudioSource``` class. Connect your sketch to quadraphonic and other non-traditional speaker setups defined with ```JSON```!
+Compose generative experiences with spatial sound sources by creating multiple instances of the ```p5.AudioSource``` class. Connect your sketch to quadraphonic and other non-traditional speaker setups!
 
 For a quick example of the library in action serve the webpage found in the ```dist``` folder.
 ## Usage
@@ -42,7 +42,7 @@ You don't need to specifiy the widths or heights (w, h) for the speakers but it 
 
 1. Get the ```AudioContext``` of the window and assign it to a varible with ```context = getAudioContext()```. 
 2. Create a ```p5.sound.js``` audio graph and call ```disconnect()``` on the final node in the chain. We'll connect it to our spatial audio source class in just a moment. 
-3. Create a ```new p5.AudioSource()``` class and pass in the ```context``` and the ```speaker placement object```. It should look something like ```audioSource_1 = new p5.AudioSource(context, speakers)```
+3. Create a ```new p5.AudioSource()``` class and pass in the ```context``` and the ```speaker layout object```. It should look something like ```audioSource_1 = new p5.AudioSource(context, speakers)```
 4. Connect the ```p5.sound.js``` audio graph to the ```p5.AudioSource``` oject using the regular ```connect()``` method.
 5. Call the ```move()``` method on the ```p5.AudioSource``` object and pass in the ```x``` and ```y``` coordinate of the sound source. ```p5.AudioSource()``` will automatically calculate the loudnesses of your sound source in individual speakers based on the proximity of the source to your virtual speakers. 
 6. Make sure to call ```start()``` on any sound making objects in your sketch!
