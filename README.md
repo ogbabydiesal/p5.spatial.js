@@ -1,7 +1,7 @@
 # p5.spatial.js (sp5tial)
 Have you ever wanted to pan your sounds in ```p5.sound.js``` through a multichannel speaker environment. No? Well now you can!  🔈🔈🔈🔈
 
-sp5tial is not meant to replace the ```3DPanner``` object in ```p5.sound.js```, but rather to allow users of ```p5.js``` to create immersive experiences and sound art using multichannel speaker systems with web-based interfaces and libraries. 
+sp5tial is not meant to replace the ```3DPanner``` object in ```p5.sound.js```, but rather to allow users of ```p5.js``` to create immersive experiences and spatialized sound art using multichannel speaker systems with web-based interfaces and libraries. 
 
 Compose generative experiences with spatial sound sources by creating multiple instances of the ```p5.AudioSource``` class. Connect your sketch to quadraphonic and other non-traditional speaker setups defined with ```JSON```!
 
@@ -38,14 +38,14 @@ let speakers = {
   }
 }
 ```
-You don't need to specifiy the width's or heights (w, h) for the speakers but it may be helpful if you are visualizing the sources, with ```rect(x,y,w,h)``` for example.
+You don't need to specifiy the widths or heights (w, h) for the speakers but it may be helpful if you are visualizing the sources with ```rect(x,y,w,h)``` for example.
 
-4. Get the ```AudioContext``` of the window and assign it to a varible with ```context = getAudioContext()``` function. 
-5. Create an ```p5.sound.js``` audio graph and call ```disconnect()``` on the final node in the chain. 
-6. Create a ```new p5.AudioSource()``` class and pass in the ```context``` and the ```speaker placement object```. It should look something like ```audioSource_1 = new p5.AudioSource(context, speakers)```
-7. Connect the ```p5.sound.js``` audio graph to the ```p5.AudioSource``` oject using the regular ```connect()``` methomd.
-8. Call the ```move()``` method on the ```p5.AudioSource``` object and pass in the ```x``` and ```y``` coordinate of the sound source. ```p5.AudioSource()``` will automatically calculate the loudnesses of your sound source for individual speakers based on the proximity to positions of your virtual speakers. 
-9. Make sure to call ```start()``` on any sound making objects in your sketch!
+1. Get the ```AudioContext``` of the window and assign it to a varible with ```context = getAudioContext()```. 
+2. Create a ```p5.sound.js``` audio graph and call ```disconnect()``` on the final node in the chain. We'll connect it to our spatial audio source class in just a moment. 
+3. Create a ```new p5.AudioSource()``` class and pass in the ```context``` and the ```speaker placement object```. It should look something like ```audioSource_1 = new p5.AudioSource(context, speakers)```
+4. Connect the ```p5.sound.js``` audio graph to the ```p5.AudioSource``` oject using the regular ```connect()``` method.
+5. Call the ```move()``` method on the ```p5.AudioSource``` object and pass in the ```x``` and ```y``` coordinate of the sound source. ```p5.AudioSource()``` will automatically calculate the loudnesses of your sound source in individual speakers based on the proximity of the source to your virtual speakers. 
+6. Make sure to call ```start()``` on any sound making objects in your sketch!
 
 ## Build from Source
 Do you want to extend or add to the library? 
