@@ -22,14 +22,6 @@ class AudioSource {
         this.speakerPositions = speakerPositions;
     }
 
-    getNode() {
-        return this.audioSource;
-    }
-
-    connect(destination) {
-        this.audioSource.connect(destination.getNode());
-    }
-
     //given the coordinates update the position of the audio in all of the channels
     move(x, y) {
         this.outputNames.forEach ((key, index) => {
@@ -37,6 +29,14 @@ class AudioSource {
             let distance = 1 - constrain(map(dist(x, y, this.speakerPositions[key].x, this.speakerPositions[key].y), 0, this.pickupRadius, 0, 1), 0, 1);
             this.gains[index].gain.value = distance;
         });
+    }
+
+    getNode() {
+        return this.audioSource;
+    }
+
+    connect(destination) {
+        this.audioSource.connect(destination.getNode());
     }
 }
 
