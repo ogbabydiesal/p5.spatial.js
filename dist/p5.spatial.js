@@ -1,34 +1,22 @@
+//TODO: this is a stub for AudioOut
 class AudioOut {
-    constructor(channels = 4, context) {
+    constructor(context, inputs) {
         this.context = context;
-       
-        
-        
-        this.channels = channels;
-
-    }
-
-    getNode() {
-        return this.gains;
-    }
-
-    getMultiChannelNode() {
-        return { node: this.merger, channels: this.channels };
     }
 }
 
 class AudioSource {
-    constructor(context, speakerPositions, pickupRadius = 100) {
-        this.context = context;
+    constructor(speakerPositions, pickupRadius = 100, context) {
+        this.context = context || getAudioContext();
         this.outputNames = Object.keys(speakerPositions);
         this.outputs = this.outputNames.length;
-        let maxChannelCount = context.destination.maxChannelCount;
+        let maxChannelCount = this.context.destination.maxChannelCount;
         this.context.destination.channelCount = maxChannelCount;
         this.audioSource = this.context.createGain();
         this.merger = this.context.createChannelMerger(this.outputs);
         this.gains = [];
         this.pickupRadius = pickupRadius;
-
+        
         for (let i = 0; i < this.outputs; i++) {
             let speaker = this.context.createGain();
             this.audioSource.connect(speaker);
@@ -36,7 +24,6 @@ class AudioSource {
             speaker.connect(this.merger, 0, i);
             this.gains.push(speaker);
         }
-
         this.merger.connect(this.context.destination);
         this.speakerPositions = speakerPositions;
     }
@@ -45,10 +32,13 @@ class AudioSource {
     move(x, y) {
         this.outputNames.forEach ((key, index) => {
             //calculate the distance from the source to each speaker
-            let distance = 1 - constrain(map(dist(x, y, this.speakerPositions[key].x, this.speakerPositions[key].y), 0, 100, 0, 1), 0, 1);
-            //this.gains[index].gain.value = distance;
-            this.gains[index].gain.setTargetAtTime(distance, this.context.currentTime, 0.05);
+            let distance = 1 - constrain(map(dist(x, y, this.speakerPositions[key].x, this.speakerPositions[key].y), 0, this.pickupRadius, 0, 1), 0, 1);
+            this.gains[index].gain.value = distance;
         });
+    }
+
+    pickupRadius(x) {
+        this.pickupRadius = x;
     }
 
     getNode() {

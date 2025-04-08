@@ -12888,7 +12888,7 @@
        * @for Biquad
        * @param {Number} cutoffFrequency the cutoff frequency of the filter.
        */    freq(f) {
-      this.biquad.frequency.value = clamp(f, 0, 24e3);
+      this.biquad.frequency.value = clamp(f, 0, 22050);
     }
     connect(destination) {
       "function" == typeof destination.getNode ? this.biquad.connect(destination.getNode()) : this.biquad.connect(destination);
@@ -15383,7 +15383,9 @@
     }
   };
   p5.prototype.getAudioContext = function() {
-    return setContext(new window.AudioContext), getContext()._context;
+    // Check if the AudioContext is already created
+    return getContext() ? (console.log(getContext().rawContext), getContext().rawContext) : (setContext(new window.AudioContext), 
+    getContext()._context);
   }
   /**
      *  Sets the AudioContext to a specified context to enable cross library compatibility.

@@ -1,9 +1,9 @@
 class AudioSource {
-    constructor(context, speakerPositions, pickupRadius = 100) {
-        this.context = context;
+    constructor(speakerPositions, pickupRadius = 100, context) {
+        this.context = context || getAudioContext();
         this.outputNames = Object.keys(speakerPositions);
         this.outputs = this.outputNames.length;
-        let maxChannelCount = context.destination.maxChannelCount;
+        let maxChannelCount = this.context.destination.maxChannelCount;
         this.context.destination.channelCount = maxChannelCount;
         this.audioSource = this.context.createGain();
         this.merger = this.context.createChannelMerger(this.outputs);
@@ -17,7 +17,6 @@ class AudioSource {
             speaker.connect(this.merger, 0, i);
             this.gains.push(speaker);
         }
-
         this.merger.connect(this.context.destination);
         this.speakerPositions = speakerPositions;
     }
@@ -29,6 +28,10 @@ class AudioSource {
             let distance = 1 - constrain(map(dist(x, y, this.speakerPositions[key].x, this.speakerPositions[key].y), 0, this.pickupRadius, 0, 1), 0, 1);
             this.gains[index].gain.value = distance;
         });
+    }
+
+    pickupRadius(x) {
+        this.pickupRadius = x;
     }
 
     getNode() {

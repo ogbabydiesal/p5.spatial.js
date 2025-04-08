@@ -49,14 +49,11 @@ function preload() {
 }
 
 function setup() {
-  context = getAudioContext();
   osc = new p5.Oscillator('sine');
   osc.freq(440);
   osc.disconnect();
-  audioSource_1 = new p5.AudioSource(context, speakers);
+  audioSource_1 = new p5.AudioSource(speakers);
   osc.connect(audioSource_1);
-  //outputs = new p5.AudioOut(4, context);
-  //audioSource_1.connect(outputs);
   let cnv = createCanvas(100, 100);
   background(220);
   textAlign(CENTER);
