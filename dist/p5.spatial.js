@@ -14,20 +14,20 @@ function quad() {
           h: 10
         },
         out_2 : {
-          x: canvasWidth - 10,
+          x: width - 10,
           y: 0,
           w: 10,
           h: 10
         },
         out_3 : {
-          x: canvasWidth - 10,
-          y: canvasHeight - 10,
+          x: width - 10,
+          y: height - 10,
           w: 10,
           h: 10
         },
         out_4 : {
           x: 0,
-          y: canvasHeight - 10,
+          y: height - 10,
           w: 10,
           h: 10
         }
@@ -35,13 +35,11 @@ function quad() {
     
 }
 
-console.log(quad);
-
 class AudioSource {
     constructor(speakerPositions, pickupRadius = 100, context) {
         this.context = context || getAudioContext();
         this.speakerPositions = speakerPositions || quad();
-        this.outputNames = Object.keys(speakerPositions);
+        this.outputNames = Object.keys(this.speakerPositions);
         this.outputs = this.outputNames.length;
         let maxChannelCount = this.context.destination.maxChannelCount;
         this.context.destination.channelCount = maxChannelCount;
@@ -57,7 +55,6 @@ class AudioSource {
             this.gains.push(speaker);
         }
         this.merger.connect(this.context.destination);
-        
     }
 
     //given the coordinates update the position of the audio in all of the channels

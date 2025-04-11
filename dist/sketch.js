@@ -49,12 +49,13 @@ function preload() {
 }
 
 function setup() {
+  let cnv = createCanvas(100, 100);
   osc = new p5.Oscillator('sine');
   osc.freq(440);
   osc.disconnect();
-  audioSource_1 = new p5.AudioSource(speakers);
+  audioSource_1 = new p5.AudioSource();
   osc.connect(audioSource_1);
-  let cnv = createCanvas(100, 100);
+  
   background(220);
   textAlign(CENTER);
   textWrap(WORD);

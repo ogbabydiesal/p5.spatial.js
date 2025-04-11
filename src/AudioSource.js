@@ -4,7 +4,7 @@ class AudioSource {
     constructor(speakerPositions, pickupRadius = 100, context) {
         this.context = context || getAudioContext();
         this.speakerPositions = speakerPositions || quad();
-        this.outputNames = Object.keys(speakerPositions);
+        this.outputNames = Object.keys(this.speakerPositions);
         this.outputs = this.outputNames.length;
         let maxChannelCount = this.context.destination.maxChannelCount;
         this.context.destination.channelCount = maxChannelCount;
