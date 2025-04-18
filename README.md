@@ -96,10 +96,11 @@ let speakers = {
 You don't need to specifiy the widths or heights (w, h) for the speakers but it may be helpful if you are visualizing the sources with ```rect(x,y,w,h)``` for example. By default ```p5.AudioSource()``` defaults to this configuration.
 
 1. Create a ```p5.sound.js``` audio node graph and call ```disconnect()``` on the final node in the chain. We'll connect it to our spatial audio source class in just a moment. 
-2. Create a ```new p5.AudioSource()``` class and optionally the ```speaker layout object```. You can also designate the falloff radius of the speakers with the second argument. It might look something like ```audioSource_1 = new p5.AudioSource(speakers, 100)```
+2. Create a ```new p5.AudioSource()``` class and optionally, a speaker layout 'object.' The pickup radius of the speakers is determined by the second argument. Your code might look something like ```audioSource_1 = new p5.AudioSource(speakers, 100)```. Additionally you maybe specify a built-in layout. Currently there are two, ```'quad'``` and ```'octaphonic'```. Create an octaphonic multichannel layout like this: ```p5.AudioSource('octaphonic', 45)```, where 45 adjusts the speaker's pickup radius.
 3. Connect the ```p5.sound.js``` audio node graph to the ```p5.AudioSource``` oject using the regular ```connect()``` method.
-4. Call the ```move()``` method on the ```p5.AudioSource``` object and pass in the ```x``` and ```y``` coordinate of the sound source. ```p5.AudioSource()``` will automatically calculate the loudnesses of your sound source in individual speakers based on the proximity of the source to  the virtual speakers. 
+4. Call the ```move()``` method on the ```p5.AudioSource``` object and pass in the ```x``` and ```y``` coordinate of the sound source. ```p5.AudioSource()``` will automatically calculate the loudnesses of your sound source in each speaker based on the proximity of the source to the virtual speakers. 
 5. Make sure to call ```start()``` on any sound making objects in your sketch!
+6. To visualize the speaker layout call the ```renderLayout()``` and ```renderPickup()``` methods. See this [example](https://editor.p5js.org/thomasjohnmartinez/sketches/qAKMyNI_q) for more info.
 
 ## Build from Source
 Do you want to extend or add to the library? 
@@ -116,3 +117,4 @@ Do you want to extend or add to the library?
 3. Create more examples with common speaker setups (8-channel cube, ring, etc...).
 4. Make 3D examples using the ```WebGL``` property of ```canvas```.
 5. Create flocking examples 🐥.
+6. Allow the renderLayout and renderPickup methods to accept rgb values.

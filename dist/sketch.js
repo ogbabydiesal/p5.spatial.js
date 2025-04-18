@@ -49,11 +49,11 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(100, 100);
+  createCanvas(400, 400);
   osc = new p5.Oscillator('sine');
   osc.freq(440);
   osc.disconnect();
-  audioSource_1 = new p5.AudioSource('quad', 100);
+  audioSource_1 = new p5.AudioSource('octaphonic');
   osc.connect(audioSource_1);
   
   background(220);
@@ -72,7 +72,7 @@ function draw() {
   
   //calculate distance from source_1 to each output
   audioSource_1.move(source_1.x, source_1.y);
-  //audioSource_1.renderLayout();
+  audioSource_1.renderLayout();
   audioSource_1.renderPickup();
   text('drag the red block around to pan the sound', 0, 20, 100);
 }
