@@ -28,14 +28,13 @@ function setup() {
   spatSource = new p5.AudioSource();
   osc.connect(spatSource);
   
-  background(220);
   textAlign(CENTER);
   textWrap(WORD);
+  textSize(10);
 }
 
 function draw() {
   background(220);
-  textSize(10);
   
   pos.x += speed.x;
   pos.y += speed.y;
@@ -118,3 +117,5 @@ Do you want to extend or add to the library?
 4. Make 3D examples using the ```WebGL``` property of ```canvas```.
 5. Create flocking examples 🐥.
 6. Allow the renderLayout and renderPickup methods to accept rgb values.
+7. Create method to report positions of speakers for custom layout drawing.
+8. Create method to draw speaker output numbers
