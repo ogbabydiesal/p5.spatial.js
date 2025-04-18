@@ -1,7 +1,19 @@
-import quad from './SpeakerLayouts.js';
+import { quad, octaphonic } from './SpeakerLayouts.js';
 
 class AudioSource {
     constructor(speakerPositions, pickupRadius = 100, context) {
+        if (typeof speakerPositions == 'string') { 
+            if (speakerPositions == 'quad') {
+                speakerPositions = quad();
+            }
+            if (speakerPositions == 'octaphonic') {
+                speakerPositions = octaphonic();
+            }
+        }
+        if (typeof speakerPositions == 'number') {
+            pickupRadius = speakerPositions;
+            speakerPositions = quad();
+        }
         this.context = context || getAudioContext();
         this.speakerPositions = speakerPositions || quad();
         this.outputNames = Object.keys(this.speakerPositions);
@@ -29,6 +41,30 @@ class AudioSource {
             let now = this.context.currentTime;
             let distance = 1 - constrain(map(dist(x, y, this.speakerPositions[key].x, this.speakerPositions[key].y), 0, this.pickupRadius, 0, 1), 0, 1);
             this.gains[index].gain.setTargetAtTime(distance, now, 0.01);
+        });
+    }
+
+    //render the layout of the speakers using p5.js rect
+    renderLayout() {
+        this.outputNames.forEach((key) => {
+            let speaker = this.speakerPositions[key];
+            push();
+            rectMode(CENTER);
+            rect(speaker.x, speaker.y, speaker.w, speaker.h);
+            pop();
+        });
+    }
+
+    //render the radius of the pickup area
+    renderPickup() {
+        this.outputNames.forEach((key) => {
+            let speaker = this.speakerPositions[key];
+            push();
+            //pink
+            fill(255, 192, 203, 40);
+            strokeWeight(0.1);
+            ellipse(speaker.x, speaker.y, this.pickupRadius * 2);
+            pop();
         });
     }
 

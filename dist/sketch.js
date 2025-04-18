@@ -33,7 +33,7 @@ let speakers = {
     y: canvasHeight - 10,
     w: 10,
     h: 10
-  }
+  } 
 }
 
 //initial position of source_1
@@ -49,11 +49,11 @@ function preload() {
 }
 
 function setup() {
-  let cnv = createCanvas(100, 100);
+  createCanvas(100, 100);
   osc = new p5.Oscillator('sine');
   osc.freq(440);
   osc.disconnect();
-  audioSource_1 = new p5.AudioSource();
+  audioSource_1 = new p5.AudioSource('quad', 100);
   osc.connect(audioSource_1);
   
   background(220);
@@ -64,18 +64,17 @@ function setup() {
 function draw() {
   background(220);
   textSize(10);
-  rect(speakers.out_1.x, speakers.out_1.y, speakers.out_1.w, speakers.out_1.h);
-  rect(speakers.out_2.x, speakers.out_2.y, speakers.out_2.w, speakers.out_2.h);
-  rect(speakers.out_3.x, speakers.out_3.y, speakers.out_3.w, speakers.out_3.h);
-  rect(speakers.out_4.x, speakers.out_4.y, speakers.out_4.w, speakers.out_4.h);
   // Draw red block
   push();
   fill(255, 0, 0);
   rect(source_1.x, source_1.y, source_1.w, source_1.h);
   pop();
-  text('drag the red block around to pan the sound', 0, 20, 100);
+  
   //calculate distance from source_1 to each output
   audioSource_1.move(source_1.x, source_1.y);
+  //audioSource_1.renderLayout();
+  audioSource_1.renderPickup();
+  text('drag the red block around to pan the sound', 0, 20, 100);
 }
 
 function mousePressed() {
