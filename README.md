@@ -74,26 +74,26 @@ let speakers = {
     h: 10
   },
   out_2 : {
-    x: canvasWidth - 10,
+    x: width,
     y: 0,
     w: 10,
     h: 10
   },
   out_3 : {
-    x: canvasWidth - 10,
-    y: canvasHeight - 10,
+    x: width,
+    y: height,
     w: 10,
     h: 10
   },
   out_4 : {
     x: 0,
-    y: canvasHeight - 10,
+    y: height,
     w: 10,
     h: 10
   }
 }
 ```
-You don't need to specifiy the widths or heights (w, h) for the speakers but it may be helpful if you are visualizing the sources with ```rect(x,y,w,h)``` for example. By default ```p5.AudioSource()``` defaults to this configuration.
+You don't need to specifiy the widths or heights (w, h) for the speakers but it may be helpful if you are visualizing the sources with ```rect(x,y,w,h)``` for example. By default ```p5.AudioSource()``` defaults to this quad configuration. The custom speaker ```JSON``` object should be defined in the p5 setup function, after ```createCanvas()```.
 
 1. Create a ```p5.sound.js``` audio node graph and call ```disconnect()``` on the final node in the chain. We'll connect it to our spatial audio source class in just a moment. 
 2. Create a ```new p5.AudioSource()``` class and optionally, a speaker layout 'object.' The pickup radius of the speakers is determined by the second argument. Your code might look something like ```audioSource_1 = new p5.AudioSource(speakers, 100)```. Additionally you maybe specify a built-in layout. Currently there are two, ```'quad'``` and ```'octaphonic'```. Create an octaphonic multichannel layout like this: ```p5.AudioSource('octaphonic', 45)```, where 45 adjusts the speaker's pickup radius.
