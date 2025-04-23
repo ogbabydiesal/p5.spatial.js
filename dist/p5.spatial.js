@@ -126,13 +126,18 @@ class AudioSource {
             this.gains.push(speaker);
         }
         this.merger.connect(this.context.destination);
+        this.x = 0;
+        this.y = 0;
     }
 
     //given the coordinates update the position of the audio in all of the channels
     move(x, y) {
+        this.x = x;
+        this.y = y;
         this.outputNames.forEach ((key, index) => {
             //calculate the distance from the source to each speaker
             let now = this.context.currentTime;
+
             let distance = 1 - constrain(map(dist(x, y, this.speakerPositions[key].x, this.speakerPositions[key].y), 0, this.pickupRadius, 0, 1), 0, 1);
             this.gains[index].gain.setTargetAtTime(distance, now, 0.01);
         });
@@ -154,12 +159,20 @@ class AudioSource {
         this.outputNames.forEach((key) => {
             let speaker = this.speakerPositions[key];
             push();
-            //pink
             fill(255, 192, 203, 40);
             strokeWeight(0.1);
             ellipse(speaker.x, speaker.y, this.pickupRadius * 2);
             pop();
         });
+    }
+
+    renderSource() {
+        console.log('hello');
+        push();
+        fill(255, 0, 0);
+        rectMode(CENTER);
+        rect(this.x, this.y, 10, 10);
+        pop();
     }
 
     pickupRadius(x) {
