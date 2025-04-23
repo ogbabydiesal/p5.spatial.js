@@ -65,7 +65,6 @@ class AudioSource {
             let speaker = this.speakerPositions[key];
             push();
             fill(255, 192, 203, 40);
-            strokeWeight(0.1);
             ellipse(speaker.x, speaker.y, this.pickupRadius * 2);
             pop();
         });

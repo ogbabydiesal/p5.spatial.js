@@ -137,7 +137,6 @@ class AudioSource {
         this.outputNames.forEach ((key, index) => {
             //calculate the distance from the source to each speaker
             let now = this.context.currentTime;
-
             let distance = 1 - constrain(map(dist(x, y, this.speakerPositions[key].x, this.speakerPositions[key].y), 0, this.pickupRadius, 0, 1), 0, 1);
             this.gains[index].gain.setTargetAtTime(distance, now, 0.01);
         });
@@ -160,14 +159,12 @@ class AudioSource {
             let speaker = this.speakerPositions[key];
             push();
             fill(255, 192, 203, 40);
-            strokeWeight(0.1);
             ellipse(speaker.x, speaker.y, this.pickupRadius * 2);
             pop();
         });
     }
 
     renderSource() {
-        console.log('hello');
         push();
         fill(255, 0, 0);
         rectMode(CENTER);
