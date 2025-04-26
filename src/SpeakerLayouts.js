@@ -27,7 +27,7 @@ export function quad() {
   } 
 }
 
-export function octaphonic() {
+export function octophonic() {
   // Calculate center point
   const centerX = width / 2;
   const centerY = height / 2;

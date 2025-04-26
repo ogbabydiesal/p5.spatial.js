@@ -38,8 +38,8 @@ let speakers = {
 
 //initial position of source_1
 let source_1 = {
-  x: 20,
-  y: 0,
+  x: 100,
+  y: 50,
   w: 10,
   h: 10
 };
@@ -53,7 +53,7 @@ function setup() {
   osc = new p5.Oscillator('sine');
   osc.freq(440);
   osc.disconnect();
-  audioSource_1 = new p5.AudioSource('octaphonic');
+  audioSource_1 = new p5.AudioSource('octophonic', 200);
   osc.connect(audioSource_1);
   
   background(220);
@@ -65,15 +65,17 @@ function draw() {
   background(220);
   textSize(10);
   // Draw red block
-  push();
-  fill(255, 0, 0);
-  rect(source_1.x, source_1.y, source_1.w, source_1.h);
-  pop();
-  
+  // push();
+  // fill(255, 0, 0);
+  // rect(source_1.x, source_1.y, source_1.w, source_1.h);
+  // pop();
+  audioSource_1.renderSource();
+
   //calculate distance from source_1 to each output
   audioSource_1.move(source_1.x, source_1.y);
   audioSource_1.renderLayout();
   audioSource_1.renderPickup();
+
   text('drag the red block around to pan the sound', 0, 20, 100);
 }
 

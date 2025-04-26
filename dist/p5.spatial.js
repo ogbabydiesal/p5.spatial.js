@@ -34,7 +34,7 @@ function quad() {
   } 
 }
 
-function octaphonic() {
+function octophonic() {
   // Calculate center point
   const centerX = width / 2;
   const centerY = height / 2;
@@ -100,8 +100,8 @@ class AudioSource {
             if (speakerPositions == 'quad') {
                 speakerPositions = quad();
             }
-            if (speakerPositions == 'octaphonic') {
-                speakerPositions = octaphonic();
+            if (speakerPositions == 'octophonic') {
+                speakerPositions = octophonic();
             }
         }
         if (typeof speakerPositions == 'number') {
@@ -186,7 +186,7 @@ class AudioSource {
 }
 
 p5.prototype.quad = quad;
-p5.prototype.octaphonic = octaphonic;
+p5.prototype.octophonic = octophonic;
 
 p5.AudioOut = AudioOut;
 p5.AudioSource = AudioSource;

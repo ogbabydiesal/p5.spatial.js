@@ -11189,7 +11189,7 @@
        */    amp(value, p = .1) {
       //if value is an object (i.e. audio signal such as an LFO), connect it to the oscillator's volume
       if ("object" == typeof value) return void value.getNode().connect(this.osc.volume);
-      let dbValue = gainToDb(value);
+      let dbValue = gainToDb(value = clamp(value, 0, 1));
       this.osc.volume.rampTo(dbValue, p);
     }
     /**
@@ -15384,7 +15384,7 @@
   };
   p5.prototype.getAudioContext = function() {
     // Check if the AudioContext is already created
-    return getContext() ? (console.log(getContext().rawContext), getContext().rawContext) : (setContext(new window.AudioContext), 
+    return getContext() ? getContext().rawContext : (setContext(new window.AudioContext), 
     getContext()._context);
   }
   /**

@@ -1,4 +1,4 @@
-import { quad, octaphonic } from './SpeakerLayouts.js';
+import { quad, octophonic } from './SpeakerLayouts.js';
 
 class AudioSource {
     constructor(speakerPositions, pickupRadius = 100, context) {
@@ -6,8 +6,8 @@ class AudioSource {
             if (speakerPositions == 'quad') {
                 speakerPositions = quad();
             }
-            if (speakerPositions == 'octaphonic') {
-                speakerPositions = octaphonic();
+            if (speakerPositions == 'octophonic') {
+                speakerPositions = octophonic();
             }
         }
         if (typeof speakerPositions == 'number') {
