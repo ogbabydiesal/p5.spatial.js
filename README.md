@@ -119,3 +119,4 @@ Do you want to extend or add to the library?
 6. Allow the renderLayout and renderPickup methods to accept rgb values.
 7. Create method to report positions of speakers for custom layout drawing.
 8. Create method to draw speaker output numbers
+9. Signals can modulate source positions
