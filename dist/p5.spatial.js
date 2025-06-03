@@ -94,14 +94,53 @@ function octophonic() {
   }
 }
 
+function fivePointOne() {
+  return {
+    out_1: {  // front left
+      x: 0,
+      y: 0,
+      w: 10,
+      h: 10
+    },
+    out_2: {  // front right
+      x: width,
+      y: 0,
+      w: 10,
+      h: 10
+    },
+    out_3: {  // center
+      x: width / 2,
+      y: 0,
+      w: 10,
+      h: 10
+    },
+    out_4: {  // rear left
+      x: 0,
+      y: height,
+      w: 10,
+      h: 10
+    },
+    out_5: {  // rear right
+      x: width,
+      y: height,
+      w: 10,
+      h: 10
+    }
+  }
+}
+
 class AudioSource {
-    constructor(speakerPositions, pickupRadius = 100, context) {
+    //if no pickup radius is given, determine how many speakers are in the layout and set the pickup radius to that number
+    constructor(speakerPositions, pickupRadius = (width / speakerPositions.length * speakerPositions.length), context) {
         if (typeof speakerPositions == 'string') { 
             if (speakerPositions == 'quad') {
                 speakerPositions = quad();
             }
             if (speakerPositions == 'octophonic') {
                 speakerPositions = octophonic();
+            }
+            if (speakerPositions == 'fivePointOne') {
+                speakerPositions = fivePointOne();
             }
         }
         if (typeof speakerPositions == 'number') {
@@ -126,8 +165,8 @@ class AudioSource {
             this.gains.push(speaker);
         }
         this.merger.connect(this.context.destination);
-        this.x = 0;
-        this.y = 0;
+        this.x = width / 2;
+        this.y = height / 2;
     }
 
     //given the coordinates update the position of the audio in all of the channels
@@ -164,6 +203,7 @@ class AudioSource {
         });
     }
 
+    //render the audio source as a red square
     renderSource() {
         push();
         fill(255, 0, 0);
@@ -172,6 +212,7 @@ class AudioSource {
         pop();
     }
 
+    //change the pickup radius of the audio source
     pickupRadius(x) {
         this.pickupRadius = x;
     }
@@ -187,6 +228,7 @@ class AudioSource {
 
 p5.prototype.quad = quad;
 p5.prototype.octophonic = octophonic;
+p5.prototype.fivePointOne = fivePointOne;
 
 p5.AudioOut = AudioOut;
 p5.AudioSource = AudioSource;

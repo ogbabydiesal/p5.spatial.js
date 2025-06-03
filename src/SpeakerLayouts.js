@@ -86,3 +86,38 @@ export function octophonic() {
     }
   }
 }
+
+export function fivePointOne() {
+  return {
+    out_1: {  // front left
+      x: 0,
+      y: 0,
+      w: 10,
+      h: 10
+    },
+    out_2: {  // front right
+      x: width,
+      y: 0,
+      w: 10,
+      h: 10
+    },
+    out_3: {  // center
+      x: width / 2,
+      y: 0,
+      w: 10,
+      h: 10
+    },
+    out_4: {  // rear left
+      x: 0,
+      y: height,
+      w: 10,
+      h: 10
+    },
+    out_5: {  // rear right
+      x: width,
+      y: height,
+      w: 10,
+      h: 10
+    }
+  }
+}
