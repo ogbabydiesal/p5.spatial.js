@@ -58,6 +58,7 @@ class AudioSource {
             let speaker = this.speakerPositions[key];
             push();
             rectMode(CENTER);
+            fill(0, 0, 0, 150);
             rect(speaker.x, speaker.y, speaker.w, speaker.h);
             pop();
         });
@@ -68,16 +69,16 @@ class AudioSource {
         this.outputNames.forEach((key) => {
             let speaker = this.speakerPositions[key];
             push();
-            fill(255, 192, 203, 40);
+            fill(0, 0, 0, 10);
             ellipse(speaker.x, speaker.y, this.pickupRadius * 2);
             pop();
         });
     }
 
-    //render the audio source as a red square
+    //render the audio source as a white square
     renderSource() {
         push();
-        fill(255, 0, 0);
+        fill(255, 255, 255, 200);
         rectMode(CENTER);
         rect(this.x, this.y, 10, 10);
         pop();
