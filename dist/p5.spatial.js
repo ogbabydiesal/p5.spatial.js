@@ -131,7 +131,7 @@ function fivePointOne() {
 
 class AudioSource {
     //if no pickup radius is given, determine how many speakers are in the layout and set the pickup radius to that number
-    constructor(speakerPositions, pickupRadius = (width / speakerPositions.length * speakerPositions.length), context) {
+    constructor(speakerPositions, pickupRadius = 100, context) {
         if (typeof speakerPositions == 'string') { 
             if (speakerPositions == 'quad') {
                 speakerPositions = quad();
