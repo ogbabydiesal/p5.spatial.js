@@ -3,8 +3,6 @@ import path from 'path';
 export default {
 	input: 'src/app.js',
 	output: {
-		file: path.resolve('dist', 'p5.spatial.js'),
-		format: 'iife',
-		name: 'p5spatial',
+		file: path.resolve('dist', 'p5.spatial.js')
 	}
 };
