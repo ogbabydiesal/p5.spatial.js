@@ -10,7 +10,7 @@ class AudioSource {
             if (speakerPositions == 'octophonic') {
                 speakerPositions = octophonic();
             }
-            if (speakerPositions == 'fivePointOne') {
+            if (speakerPositions == '5.1') {
                 speakerPositions = fivePointOne();
             }
         }
