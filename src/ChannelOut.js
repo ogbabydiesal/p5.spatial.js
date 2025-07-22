@@ -1,10 +1,17 @@
 class ChannelOut {
     constructor(channel = 0, context) {
         this.context = context || getAudioContext();
-        this.channel = channel;
         this.input = this.context.createGain();
         let maxChannelCount = this.context.destination.maxChannelCount;
         this.context.destination.channelCount = maxChannelCount;
+        if (channel <= maxChannelCount) {
+            this.channel = channel
+        }
+        else {
+            console.warn("You are trying to send a signal to an output that doesn't exist, are you sure your multichannel hardware is configured as your default sound output?")
+            channel = maxChannelCount - 1
+            this.channel = channel
+        }
         this.merger = this.context.createChannelMerger(maxChannelCount);
         this.input.channelCount = 1;
         this.input.channelCountMode = 'explicit';
