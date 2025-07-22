@@ -1,10 +1,18 @@
 class ChannelOut {
     constructor(channel = 0, context) {
         this.context = context || getAudioContext();
-        this.channel = channel;
         this.input = this.context.createGain();
         let maxChannelCount = this.context.destination.maxChannelCount;
         this.context.destination.channelCount = maxChannelCount;
+        if (channel <= maxChannelCount) {
+            this.channel = channel;
+        }
+        else {
+            console.warn("You are trying to send a signal to an output that doesn't exist, are you sure your multichannel hardware is configured as your default sound output?");
+            channel = maxChannelCount;
+            this.channel = channel;
+            console.log(channel);
+        }
         this.merger = this.context.createChannelMerger(maxChannelCount);
         this.input.channelCount = 1;
         this.input.channelCountMode = 'explicit';
@@ -158,8 +166,7 @@ function fivePointOne() {
 }
 
 class AudioSource {
-    //if no pickup radius is given, determine how many speakers are in the layout and set the pickup radius to that number
-    constructor(speakerPositions, pickupRadius = 100, context) {
+    constructor(speakerPositions, maxDistance = 100, context) {
         if (typeof speakerPositions == 'string') { 
             if (speakerPositions == 'quad') {
                 speakerPositions = quad();
@@ -172,7 +179,7 @@ class AudioSource {
             }
         }
         if (typeof speakerPositions == 'number') {
-            pickupRadius = speakerPositions;
+            maxDistance = speakerPositions;
             speakerPositions = quad();
         }
         this.context = context || getAudioContext();
@@ -184,7 +191,7 @@ class AudioSource {
         this.audioSource = this.context.createGain();
         this.merger = this.context.createChannelMerger(this.outputs);
         this.gains = [];
-        this.pickupRadius = pickupRadius;
+        this.maxDistance = maxDistance;
         for (let i = 0; i < this.outputs; i++) {
             let speaker = this.context.createGain();
             this.audioSource.connect(speaker);
@@ -204,7 +211,7 @@ class AudioSource {
         this.outputNames.forEach ((key, index) => {
             //calculate the distance from the source to each speaker
             let now = this.context.currentTime;
-            let distance = 1 - constrain(map(dist(x, y, this.speakerPositions[key].x, this.speakerPositions[key].y), 0, this.pickupRadius, 0, 1), 0, 1);
+            let distance = 1 - constrain(map(dist(x, y, this.speakerPositions[key].x, this.speakerPositions[key].y), 0, this.maxDistance, 0, 1), 0, 1);
             this.gains[index].gain.setTargetAtTime(distance, now, 0.01);
         });
     }
@@ -221,13 +228,13 @@ class AudioSource {
         });
     }
 
-    //render the radius of the pickup area
-    renderPickup() {
+    //render the maximum radius
+    renderDistance() {
         this.outputNames.forEach((key) => {
             let speaker = this.speakerPositions[key];
             push();
             fill(0, 0, 0, 10);
-            ellipse(speaker.x, speaker.y, this.pickupRadius * 2);
+            ellipse(speaker.x, speaker.y, this.maxDistance * 2);
             pop();
         });
     }
@@ -241,9 +248,9 @@ class AudioSource {
         pop();
     }
 
-    //change the pickup radius of the audio source
-    pickupRadius(x) {
-        this.pickupRadius = x;
+    //change the maximum distance of the audio source
+    maxDistance(x) {
+        this.maxDistance = x;
     }
 
     getNode() {
