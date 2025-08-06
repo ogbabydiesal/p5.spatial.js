@@ -1,10 +1,10 @@
-import { quad, octophonic, fivePointOne } from './SpeakerLayouts.js';
+import { quadraphonic, octophonic, fivePointOne } from './SpeakerLayouts.js';
 
 class AudioSource {
     constructor(speakerPositions, maxDistance = 100, context) {
         if (typeof speakerPositions == 'string') { 
             if (speakerPositions == 'quad') {
-                speakerPositions = quad();
+                speakerPositions = quadraphonic();
             }
             if (speakerPositions == 'octophonic') {
                 speakerPositions = octophonic();
@@ -15,10 +15,10 @@ class AudioSource {
         }
         if (typeof speakerPositions == 'number') {
             maxDistance = speakerPositions;
-            speakerPositions = quad();
+            speakerPositions = quadraphonic();
         }
         this.context = context || getAudioContext();
-        this.speakerPositions = speakerPositions || quad();
+        this.speakerPositions = speakerPositions || quadraphonic();
         this.outputNames = Object.keys(this.speakerPositions);
         this.outputs = this.outputNames.length;
         let maxChannelCount = this.context.destination.maxChannelCount;

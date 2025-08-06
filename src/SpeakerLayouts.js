@@ -1,4 +1,4 @@
-export function quad() {
+export function quadraphonic() {
   return {
     out_1 : {
       x: 0,
