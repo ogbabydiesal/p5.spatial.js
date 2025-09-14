@@ -1,12 +1,20 @@
 # p5.spatial.js (sp5tial)
-Have you ever wanted to pan your sounds in ```p5.sound.js``` through a multichannel speaker environment. No? Well now you can!  🔈🔈🔈🔈
+Have you ever wanted to pan your sounds in ```p5.sound.js``` through a multichannel speaker environment. Well now you can!  🔈🔈🔈🔈
 
 p5.spatial.js is not meant to replace the ```p5.3DPanner``` class in ```p5.sound.js``` (which is great for creating virtual headphone environments), but rather to allow users of ```p5.js``` to create spatialized sound works using multichannel speaker systems in a web browser. 
 
 Combine this library with your ```p5.js``` and ```p5.sound.js``` sketches to create moving and interactive spatialized sound objects with the included ```p5.AudioSource``` class. Connect your sketch to quadraphonic and other non-traditional speaker setups!
 
+## Installation
+Include the library using the CDN link after ```p5.sound.js```
+```
+<script src="https://cdn.jsdelivr.net/gh/ogbabydiesal/p5.spatial.js@latest/dist/p5.spatial.js"></script>
+```
+
 ## A minimal code example
-Below is a simple example that uses the multichannel audio class, ```p5.AudioSource```, from p5.spatial.js. A live example can be found [here](https://editor.p5js.org/thomasjohnmartinez/sketches/GR0uwnKSQ). Note how the audio node graph follows the same pattern found in ```p5.sound.js```, where source nodes can be chained to the spatial ```p5.AudioSource``` class using the ```connect()``` method. Calling ```p5.AudioSource())``` with no arguments initializes a quadraphonic panner (with speakers in a clockwise layout). Custom speaker layouts can be defined using a ```JSON``` object that describes the position of each speaker in the system. An example of how these layouts should be formatted is illustrated in the General Usage section below. Calling the ```move(x, y)``` method on the ```p5.AudioSource``` object updates the position of the audio source and evaluates the gain relative to each channel in the speaker layout.
+Below is a simple example that uses the multichannel audio class, ```p5.AudioSource```, from p5.spatial.js. A live example can be found [here](https://editor.p5js.org/thomasjohnmartinez/sketches/GR0uwnKSQ). 
+
+Note how the audio node graph follows the same pattern found in ```p5.sound.js```, where source nodes can be chained to the spatial ```p5.AudioSource``` class using the ```connect()``` method. Calling ```p5.AudioSource())``` with no arguments initializes a quadraphonic panner (with speakers in a clockwise layout). Custom speaker layouts can be defined using a ```JSON``` object that describes the position of each speaker in the system. An example of how these layouts should be formatted is illustrated in the General Usage section below. Calling the ```move(x, y)``` method on the ```p5.AudioSource``` object updates the position of the audio source and evaluates the gain relative to each channel in the speaker layout.
 ```javascript copy
 let osc;
 let spatSource;
