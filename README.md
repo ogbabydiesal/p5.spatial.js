@@ -1,7 +1,7 @@
 # p5.spatial.js (sp5tial)
-Have you ever wanted to pan your sounds in ```p5.sound.js``` through a multichannel speaker environment. Well now you can!  🔈🔈🔈🔈
+Have you ever wanted to create spatialized sound works in the browser? p5.spatial.js adds multichannel audio output support for the popular ```p5.sound.js``` library.
 
-p5.spatial.js is not meant to replace the ```p5.3DPanner``` class in ```p5.sound.js``` (which is great for creating virtual headphone environments), but rather to allow users of ```p5.js``` to create spatialized sound works using multichannel speaker systems in a web browser. 
+ 🔈🔈🔈🔈
 
 Combine this library with your ```p5.js``` and ```p5.sound.js``` sketches to create moving and interactive spatialized sound objects with the included ```p5.AudioSource``` class. Connect your sketch to quadraphonic and other non-traditional speaker setups!
 
@@ -67,10 +67,11 @@ function mousePressed() {
 }
 ```
 
-For more examples of the library in use see the p5 editor examples [here](https://editor.p5js.org/thomasjohnmartinez/collections/HK0ZrxLoQ). Additionally, the ```dist``` folder in this repo contains an example you can start with.
+## More Examples
+For more examples of the library in use see the p5 editor examples [here](https://editor.p5js.org/thomasjohnmartinez/collections/HK0ZrxLoQ).
 ## General Usage
-1. Configure a multichannel interface as the default system audio output device. (i.e in  your Mac or Windows system preferences.)
-2. Add the ```p5.spatial.js``` library after the ```p5.sound.js``` and ```p5.js``` core library
+1. Configure a multichannel audio interface as your systems default audio output device. (i.e in  your Mac or Windows system preferences.)
+2. Include the ```p5.spatial.js``` library after the ```p5.sound.js``` and ```p5.js``` core library
 3. (optional) Create a ```JSON Object``` containing the positions of the virtual speakers in the top of your sketch using ```canvas``` coordinates. A standard quad setup in a clockwise channel configuration might look like this for example:
 ```
 let speakers = {
@@ -102,7 +103,7 @@ let speakers = {
 ```
 You don't need to specifiy the widths or heights (w, h) for the speakers but it may be helpful if you are visualizing the sources with ```rect(x,y,w,h)``` for example. By default ```p5.AudioSource()``` defaults to this quad configuration. The custom speaker ```JSON``` object should be defined in the p5 setup function, after ```createCanvas()```.
 
-1. Create a ```p5.sound.js``` audio node graph and call ```disconnect()``` on the final node in the chain. We'll connect it to our spatial audio source class in just a moment. 
+1. Create a ```p5.sound.js``` audio node graph and call ```disconnect()``` on the final node in the chain. 
 2. Create a ```new p5.AudioSource()``` class and optionally, a speaker layout 'object.' The pickup radius of the speakers is determined by the second argument. Your code might look something like ```audioSource_1 = new p5.AudioSource(speakers, 100)```. Additionally you maybe specify a built-in layout. Currently there are three, ```'quad'```, ```'octophonic'```. and ```'5.1'```. Create an octophonic multichannel layout like this: ```p5.AudioSource('octophonic', 45)```, where 45 adjusts the speaker's pickup radius.
 3. Connect the ```p5.sound.js``` audio node graph to the ```p5.AudioSource``` oject using the regular ```connect()``` method.
 4. Call the ```move()``` method on the ```p5.AudioSource``` object and pass in the ```x``` and ```y``` coordinate of the sound source. ```p5.AudioSource()``` will automatically calculate the loudnesses of your sound source in each speaker based on the proximity of the source to the virtual speakers. 
