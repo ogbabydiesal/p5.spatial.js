@@ -26,6 +26,8 @@ class AudioSource {
         this.audioSource = this.context.createGain();
         this.merger = this.context.createChannelMerger(this.outputs);
         this.gains = [];
+        this.label = "label me!";
+        this.textSize = 12;
         this.maxDistance = maxDistance;
         for (let i = 0; i < this.outputs; i++) {
             let speaker = this.context.createGain();
@@ -62,7 +64,7 @@ class AudioSource {
             pop();
         });
     }
-
+    
     //render the maximum radius
     renderDistance() {
         this.outputNames.forEach((key) => {
@@ -80,6 +82,21 @@ class AudioSource {
         fill(255, 255, 255, 200);
         rectMode(CENTER);
         rect(this.x, this.y, 10, 10);
+        pop();
+    }
+
+    //label the audio source
+    applyLabel(label = 'label me!') {
+        this.label = label;
+    }
+
+    //render the audio source as a white square
+    renderLabel(size = this.textSize) {
+        push();
+        fill(255, 255, 255, 200);
+        textAlign(CENTER);
+        textSize(size);
+        text(this.label, this.x, this.y + 15);
         pop();
     }
 
