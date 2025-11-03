@@ -2,3 +2,4 @@ node_modules
 .DS_Store
 dist/index.html
 dist/sketch.js
+dist/p5.sound.js
