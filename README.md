@@ -5,7 +5,7 @@ Have you ever wanted to create spatialized sound works in the browser? p5.spatia
 
  ![octo](https://d2w9rnfcy7mm78.cloudfront.net/41216013/original_be1e1819e6c73137e05382a84adafa50.png?1763532716?bc=0)
 
-Combine this library with your ```p5.js``` and ```p5.sound.js``` sketches to create moving and interactive spatialized sound objects with the included ```p5.AudioSource``` class. Connect your sketch to quadraphonic and other non-traditional speaker setups!
+Combine this library with your ```p5.js``` and ```p5.sound.js``` sketches to create moving and interactive spatialized sound objects with the included ```p5.AudioSource``` class. Connect your sketch to quadraphonic and other non-standardized speaker setups!
 
 ## Installation and Setup
 Select the connected multichannel audio interface as the default  output device in your system settings.
