@@ -1,4 +1,4 @@
-# p5.spatial.js (sp5tial)
+# p5.spatial.js
 Have you ever wanted to create spatialized sound works in the browser? p5.spatial.js adds multichannel audio output support for the popular ```p5.sound.js``` library.
 
  🔈🔈🔈🔈
@@ -7,16 +7,16 @@ Have you ever wanted to create spatialized sound works in the browser? p5.spatia
 
 Combine this library with your ```p5.js``` and ```p5.sound.js``` sketches to create moving and interactive spatialized sound objects with the included ```p5.AudioSource``` class. Connect your sketch to quadraphonic and other non-traditional speaker setups!
 
-## Installation
-Include the library using the CDN link after ```p5.sound.js```
+## Installation and Setup
+Include the library in your <head> tag using the CDN link after ```p5.js``` and ```p5.sound.js```.
 ```
 <script src="https://cdn.jsdelivr.net/gh/ogbabydiesal/p5.spatial.js@latest/dist/p5.spatial.js"></script>
 ```
 
 ## A minimal code example
-Below is a simple example that uses the multichannel audio class, ```p5.AudioSource```, from p5.spatial.js. A live example can be found [here](https://editor.p5js.org/thomasjohnmartinez/sketches/GR0uwnKSQ). 
+Below is a simple example that uses the multichannel audio class, ```p5.AudioSource``` from p5.spatial.js. A live example can be found [here](https://editor.p5js.org/thomasjohnmartinez/sketches/GR0uwnKSQ). 
 
-Note how the audio node graph follows the same pattern found in ```p5.sound.js```, where source nodes can be chained to the spatial ```p5.AudioSource``` class using the ```connect()``` method. Calling ```p5.AudioSource())``` with no arguments initializes a quadraphonic panner (with speakers in a clockwise layout). Custom speaker layouts can be defined using a ```JSON``` object that describes the position of each speaker in the system. An example of how these layouts should be formatted is illustrated in the General Usage section below. Calling the ```move(x, y)``` method on the ```p5.AudioSource``` object updates the position of the audio source and evaluates the gain relative to each channel in the speaker layout.
+Note how the audio graph follows the a similar pattern found in vanilla ```p5.sound.js```, where source nodes are chained to the spatial ```p5.AudioSource``` class with the ```connect()``` method. Calling ```p5.AudioSource())``` with no arguments initializes a quadraphonic panner (with speakers in a clockwise layout). Custom speaker layouts can be defined using a ```JSON``` object that describes the position of each speaker in the system. An example of how these layouts should be formatted is illustrated in the General Usage section below. Calling the ```move(x, y)``` method on the ```p5.AudioSource``` object updates the position of the audio source and evaluates the gain relative to each channel in the speaker layout.
 ```javascript copy
 let osc;
 let spatSource;
@@ -69,7 +69,7 @@ function mousePressed() {
 }
 ```
 
-## More Examples
+## More Examples!
 For more examples of the library in use see the p5 editor examples [here](https://editor.p5js.org/thomasjohnmartinez/collections/HK0ZrxLoQ).
 ## General Usage
 1. Configure a multichannel audio interface as your systems default audio output device. (i.e in  your Mac or Windows system preferences.)
@@ -103,14 +103,14 @@ let speakers = {
   }
 }
 ```
-You don't need to specifiy the widths or heights (w, h) for the speakers but it may be helpful if you are visualizing the sources with ```rect(x,y,w,h)``` for example. By default ```p5.AudioSource()``` defaults to this quad configuration. The custom speaker ```JSON``` object should be defined in the p5 setup function, after ```createCanvas()```.
+You don't need to specifiy the widths or heights (w, h) for the speakers but it may be helpful if you are visualizing the sources with ```rect(x,y,w,h)``` for example. By default ```p5.AudioSource()``` defaults to this quad configuration. The custom speaker ```JSON``` object should be defined in the p5 setup function, after ```createCanvas()``` (if you want to use ```width``` or ```height``` params).
 
-1. Create a ```p5.sound.js``` audio node graph and call ```disconnect()``` on the final node in the chain. 
-2. Create a ```new p5.AudioSource()``` class and optionally, a speaker layout 'object.' The pickup radius of the speakers is determined by the second argument. Your code might look something like ```audioSource_1 = new p5.AudioSource(speakers, 100)```. Additionally you maybe specify a built-in layout. Currently there are three, ```'quad'```, ```'octophonic'```. and ```'5.1'```. Create an octophonic multichannel layout like this: ```p5.AudioSource('octophonic', 45)```, where 45 adjusts the speaker's pickup radius.
-3. Connect the ```p5.sound.js``` audio node graph to the ```p5.AudioSource``` oject using the regular ```connect()``` method.
-4. Call the ```move()``` method on the ```p5.AudioSource``` object and pass in the ```x``` and ```y``` coordinate of the sound source. ```p5.AudioSource()``` will automatically calculate the loudnesses of your sound source in each speaker based on the proximity of the source to the virtual speakers. 
+1. Create a ```p5.sound.js``` audio graph and call ```disconnect()``` on the final node in the chain. 
+2. Create a ```new p5.AudioSource()``` class and optionally, a speaker layout (you can choose 'quad', 'oct) The pickup radius of the speakers is determined by the second argument. Your code might look something like ```audioSource_1 = new p5.AudioSource(speakers, 100)```. Additionally you maybe specify a built-in layout. Currently there are three, ```'quad'```, ```'octophonic'```. and ```'5.1'```. Create an octophonic multichannel layout like this: ```p5.AudioSource('octophonic', 45)```, where 45 adjusts the speaker's pickup radius/overlap factor.
+3. Connect the ```p5.sound.js``` audio graph to the ```p5.AudioSource``` oject using the standard ```connect()``` method.
+4. Call the ```move()``` method on the ```p5.AudioSource``` object and pass in and ```x``` and ```y``` coordinate for the sound source. ```p5.AudioSource()``` will automatically calculate the amplitudes of your sound source in each speaker based on the proximity of the source to the virtual output nodes. 
 5. Make sure to call ```start()``` on any sound making objects in your sketch!
-6. To visualize the speaker layout call the ```renderLayout()``` and ```renderPickup()``` methods. See this [example](https://editor.p5js.org/thomasjohnmartinez/sketches/qAKMyNI_q) for more info.
+6. To visualize the speaker layout call the ```renderLayout()``` and ```renderDistance()``` methods. See this [example](https://editor.p5js.org/thomasjohnmartinez/sketches/qAKMyNI_q) for more info.
 
 ## Build from Source
 Do you want to extend or add to the library? 
