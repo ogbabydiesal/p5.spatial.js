@@ -108,10 +108,6 @@ class AudioSource {
     getNode() {
         return this.audioSource;
     }
-
-    connect(destination) {
-        this.audioSource.connect(destination.getNode());
-    }
 }
 
 export default AudioSource;
